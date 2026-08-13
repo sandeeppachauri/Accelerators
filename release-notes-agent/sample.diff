@@ -1,0 +1,2 @@
+diff --git a/foo.py b/foo.py
++def foo(): pass

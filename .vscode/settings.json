@@ -1,0 +1,6 @@
+{
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}/claude-auth-accelerator/src",
+        "${workspaceFolder}/release-notes-agent/src"
+    ]
+}

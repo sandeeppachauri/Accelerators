@@ -1,0 +1,10 @@
+[project]
+name = "release-notes-agent"
+version = "1.0.0"
+description = "Summarizes recent commits into release notes"
+requires-python = ">=3.10"
+dependencies = [
+    "claude-auth-accelerator>=0.1.0,<0.2.0",
+]
+[project.scripts]
+release-notes = "release_notes_agent.cli:main"
