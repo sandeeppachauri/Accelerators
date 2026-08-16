@@ -16,6 +16,8 @@ Each project is an independently installable Python package under `src/` (PEP 66
 ```bash
 pip install -e claude-auth-accelerator
 pip install -e release-notes-agent
+pip install -e ClaudeSDKLoggerAccelerator
+pip install -e ClaudeSDKLoggerAcceleratorTester
 ```
 
 See each project's README for usage and configuration.
