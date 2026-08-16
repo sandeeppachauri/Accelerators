@@ -18,6 +18,9 @@ env/
 # Claude Code local settings
 .claude/settings.local.json
 
+# Generated trace logs
+logs/
+
 # OS
 .DS_Store
 Thumbs.db

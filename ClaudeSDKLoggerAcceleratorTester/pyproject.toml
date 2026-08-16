@@ -1,0 +1,19 @@
+[project]
+name = "claude-sdk-logger-accelerator-tester"
+version = "0.1.0"
+description = "Exercises every ClaudeSDKLoggerAccelerator trace scope end-to-end"
+requires-python = ">=3.10"
+dependencies = [
+    "claude-sdk-logger-accelerator>=0.1.0,<0.2.0",
+    "claude-auth-accelerator>=0.1.0,<0.2.0",
+]
+
+[project.scripts]
+logger-tester = "logger_tester.run:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/logger_tester"]

@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c \"import logger_tester.run; print\\('import ok'\\); import sdk_logger_accelerator as l; print\\(l.__all__\\)\")",
+      "Bash(grep -i \"\\\\.env$\")"
+    ]
+  }
+}

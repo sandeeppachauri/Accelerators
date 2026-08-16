@@ -1,0 +1,10 @@
+{
+  "log_dir": "./logs",
+  "filename_pattern": "trace.log",
+  "rotation": {
+    "strategy": "size",
+    "max_bytes": 10000000,
+    "backup_count": 5
+  },
+  "enabled_scopes": ["TOOL_CALL", "ERROR", "INFO"]
+}

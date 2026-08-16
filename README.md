@@ -6,6 +6,8 @@ Reusable building blocks for apps built on the [Claude Agent SDK](https://github
 
 - [`claude-auth-accelerator`](claude-auth-accelerator/README.md) — reusable credential resolution (console API key -> ambient `claude` CLI OAuth -> OS-mounted session) so consumers never touch env vars or mount paths directly.
 - [`release-notes-agent`](release-notes-agent/README.md) — summarizes a git diff into a one-line release-note bullet, built on top of `claude-auth-accelerator`.
+- [`ClaudeSDKLoggerAccelerator`](ClaudeSDKLoggerAccelerator/README.md) — drop-in, on-demand JSON-line tracing of Claude Agent SDK tool calls/agent activity via `PreToolUse`/`PostToolUse` hooks. Standalone, no dependency on any other Accelerator.
+- [`ClaudeSDKLoggerAcceleratorTester`](ClaudeSDKLoggerAcceleratorTester/README.md) — smoke-test project that exercises every trace scope of `ClaudeSDKLoggerAccelerator` end-to-end.
 
 ## Install
 
