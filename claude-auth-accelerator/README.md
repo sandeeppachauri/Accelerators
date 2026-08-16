@@ -36,3 +36,14 @@ If none resolve, `resolve_auth` raises `AuthResolutionError` telling the caller 
 - `resolver.py` — `resolve_auth`, which orders and tries the providers.
 - `options.py` — `build_options`, which wraps `resolve_auth` and assembles `ClaudeAgentOptions`.
 - `exceptions.py` — `AuthResolutionError`.
+
+## Related Accelerators
+
+Pair with [`claude-sdk-logger-accelerator`](../ClaudeSDKLoggerAccelerator/README.md) for trace logging of tool calls and agent activity on the same `ClaudeAgentOptions`:
+
+```bash
+pip install -e claude-auth-accelerator
+pip install -e ClaudeSDKLoggerAccelerator
+```
+
+Requires Python >=3.10 and `claude-agent-sdk>=0.1.0` (same requirement as this package).
