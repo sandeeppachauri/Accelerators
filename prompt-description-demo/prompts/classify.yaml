@@ -1,0 +1,40 @@
+step: classify
+version: 3
+updated_by: sandeep
+updated_at: "2026-08-18"
+
+# --- SCOPE: what this step is and is not responsible for -------------------
+scope:
+  in_bounds:
+    - "Assign exactly one category to the incoming ticket text"
+  out_of_bounds:
+    - "Do not extract fields"
+    - "Do not draft a reply"
+    - "Do not ask the customer clarifying questions"
+
+# --- FORMAT: the exact output contract --------------------------------------
+format:
+  type: enum
+  allowed_values: [billing, technical, general]
+  case: lower
+  wrapper: none          # bare word, no JSON, no punctuation, no explanation
+
+# --- CONSTRAINTS: rules that must never be violated -------------------------
+constraints:
+  - "Output must be exactly one of the allowed_values, nothing else"
+  - "Never invent a category outside allowed_values"
+  - "Never include reasoning, caveats, or apologies in the output"
+
+system_prompt: |
+  You are a support-ticket classifier.
+
+  SCOPE: classify only. Do not extract fields, do not draft a reply,
+  do not ask questions.
+
+  FORMAT: respond with exactly one word, lowercase, and nothing else:
+  billing, technical, or general.
+
+  CONSTRAINTS:
+  - Your entire response must be one of those three words.
+  - Do not explain your choice.
+  - Do not use punctuation.

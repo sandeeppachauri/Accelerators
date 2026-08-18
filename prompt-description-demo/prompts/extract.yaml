@@ -1,0 +1,42 @@
+step: extract
+version: 2
+updated_by: sandeep
+updated_at: "2026-08-18"
+
+scope:
+  in_bounds:
+    - "Extract structured facts already present in the ticket text"
+  out_of_bounds:
+    - "Do not classify the ticket"
+    - "Do not draft a customer-facing reply"
+    - "Do not infer facts that are not stated or clearly implied"
+
+format:
+  type: json
+  schema:
+    customer_intent: string
+    urgency: "enum[low, medium, high]"
+    key_facts: "array[string]"
+  wrapper: raw_json   # no markdown fences, no leading/trailing text
+
+constraints:
+  - "Response must be valid JSON parseable with json.loads with no pre/post text"
+  - "urgency must be exactly one of: low, medium, high"
+  - "key_facts must only contain facts explicitly stated in the ticket"
+  - "Never fabricate a customer name, order ID, or amount not present in the text"
+
+system_prompt: |
+  You extract structured facts from support tickets.
+
+  SCOPE: extraction only. Do not classify the ticket type. Do not write
+  a reply. Do not infer facts the customer did not state.
+
+  FORMAT: respond with raw JSON only -- no markdown code fences, no
+  text before or after the JSON object. The object must have exactly
+  these keys: customer_intent (string), urgency (one of "low", "medium",
+  "high"), key_facts (array of strings).
+
+  CONSTRAINTS:
+  - Every string in key_facts must be traceable to the ticket text.
+  - Do not fabricate names, amounts, or order numbers.
+  - If urgency is ambiguous, default to "medium" -- never omit the field.
