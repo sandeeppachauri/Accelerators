@@ -1,6 +1,6 @@
 [project]
 name = "claude-auth-accelerator"
-version = "0.1.0"
+version = "0.2.0"
 description = "Reusable credential resolution for Claude Agent SDK consumers"
 requires-python = ">=3.10"
 dependencies = [

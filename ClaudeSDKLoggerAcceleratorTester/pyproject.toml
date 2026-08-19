@@ -5,7 +5,7 @@ description = "Exercises every ClaudeSDKLoggerAccelerator trace scope end-to-end
 requires-python = ">=3.10"
 dependencies = [
     "claude-sdk-logger-accelerator>=0.1.0,<0.2.0",
-    "claude-auth-accelerator>=0.1.0,<0.2.0",
+    "claude-auth-accelerator>=0.1.0,<0.3.0",
 ]
 
 [project.scripts]

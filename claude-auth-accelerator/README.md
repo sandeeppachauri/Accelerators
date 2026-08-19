@@ -20,6 +20,18 @@ options = build_options(environment="local", model="claude-sonnet-4-6", max_turn
 
 `build_options()` resolves a credential for the given `environment`, then returns a `ClaudeAgentOptions` with that credential's env vars merged in. Any extra kwargs (including an `env` dict) are passed through to `ClaudeAgentOptions` and merged on top of the resolved credential's env.
 
+## Direct Messages API usage
+
+For consumers calling the raw Claude Messages API directly (no `claude_agent_sdk`), use `build_api_credential()` instead of `build_options()`:
+
+```python
+from auth_accelerator import build_api_credential
+
+api_key = build_api_credential(environment="local")
+```
+
+This resolves a credential the same way `build_options()` does, but returns a plain string and never imports `claude_agent_sdk`. It only succeeds when the resolved credential is a console `ANTHROPIC_API_KEY` (must start with `sk-ant-api`). If resolution instead finds an ambient `claude login` session (`OAuthSessionAuth`) or an OS-mounted session (`OsSessionAuth`), it raises `AuthResolutionError` — those credential kinds only work through the SDK's subprocess, not a direct API call. Set `ANTHROPIC_API_KEY` to use this path.
+
 ## Credential resolution
 
 `resolve_auth(environment)` (`src/auth_accelerator/resolver.py`) tries providers in order and returns the first match. First match wins, so a developer's console key never gets silently shadowed by a stale mount:
@@ -35,6 +47,7 @@ If none resolve, `resolve_auth` raises `AuthResolutionError` telling the caller 
 - `providers.py` — `ResolvedCredential` dataclass plus the three provider classes above.
 - `resolver.py` — `resolve_auth`, which orders and tries the providers.
 - `options.py` — `build_options`, which wraps `resolve_auth` and assembles `ClaudeAgentOptions`.
+- `api_credential.py` — `build_api_credential`, which wraps `resolve_auth` for raw Messages API consumers (no SDK dependency).
 - `exceptions.py` — `AuthResolutionError`.
 
 ## Related Accelerators
