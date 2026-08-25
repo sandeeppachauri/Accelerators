@@ -21,7 +21,7 @@ Requires an authenticated `claude` CLI session (or `ANTHROPIC_API_KEY` set) for 
 
 ## What it does
 
-1. Configures the logger with all 8 scopes enabled (`logger_config.json`).
+1. Configures the logger with all 10 scopes enabled (`logger_config.json`).
 2. Runs one real Claude Agent SDK turn with `pre_tool_use_hook`/`post_tool_use_hook` wired in — covers `TOOL_CALL`.
-3. Calls `log_event()` directly once for each of `USER_INPUT`, `ASSISTANT_TEXT`, `FULL_TURN`, `ERROR`, `INFO`, `WARNING`, `DEBUG`.
+3. Calls `log_event()` directly once for each of `USER_INPUT`, `MODEL_CALL_START`, `MODEL_CALL_END`, `ASSISTANT_TEXT`, `FULL_TURN`, `ERROR`, `INFO`, `WARNING`, `DEBUG`.
 4. Prints the path to the resulting `./logs/trace.log`, which contains one JSON line per scope (two for `TOOL_CALL`: pre + post), each with `schema_version` set.

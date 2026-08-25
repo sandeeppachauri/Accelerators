@@ -8,6 +8,8 @@
   },
   "enabled_scopes": [
     "TOOL_CALL",
+    "MODEL_CALL_START",
+    "MODEL_CALL_END",
     "ASSISTANT_TEXT",
     "USER_INPUT",
     "FULL_TURN",

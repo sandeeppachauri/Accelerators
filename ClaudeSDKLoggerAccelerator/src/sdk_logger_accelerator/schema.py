@@ -12,6 +12,8 @@ class Scope(str, Enum):
     """Tags a trace record's kind; also used as the enabled_scopes filter."""
 
     TOOL_CALL = "TOOL_CALL"
+    MODEL_CALL_START = "MODEL_CALL_START"
+    MODEL_CALL_END = "MODEL_CALL_END"
     ASSISTANT_TEXT = "ASSISTANT_TEXT"
     USER_INPUT = "USER_INPUT"
     FULL_TURN = "FULL_TURN"

@@ -33,10 +33,21 @@ async def _drive_tool_call() -> None:
 
 
 async def _drive_remaining_scopes() -> None:
-    """Covers every Scope besides TOOL_CALL via direct log_event() calls."""
+    """Covers every Scope besides TOOL_CALL via direct log_event() calls, including MODEL_CALL_START/END."""
     await logger.log_event(
         Scope.USER_INPUT, session_id=SESSION_ID, turn_index=1,
         user_message="List the files in the current directory.",
+    )
+    await logger.log_event(
+        Scope.MODEL_CALL_START, session_id=SESSION_ID, turn_index=1,
+        model="claude-sonnet-5",
+        payload="Model call started",
+    )
+    await logger.log_event(
+        Scope.MODEL_CALL_END, session_id=SESSION_ID, turn_index=1,
+        model="claude-sonnet-5",
+        latency_ms=842.5,
+        payload="Model call completed",
     )
     await logger.log_event(
         Scope.ASSISTANT_TEXT, session_id=SESSION_ID, turn_index=1,
