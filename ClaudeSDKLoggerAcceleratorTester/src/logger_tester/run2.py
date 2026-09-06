@@ -4,13 +4,14 @@ from __future__ import annotations
 import asyncio
 import json
 import os
+from collections.abc import AsyncGenerator
 from pathlib import Path
+from typing import cast
 
 from auth_accelerator.options import build_options
-from claude_agent_sdk import HookMatcher, query
+from claude_agent_sdk import HookMatcher, Message, query
 
 import sdk_logger_accelerator as logger
-from sdk_logger_accelerator import Scope
 
 async def main() -> None:
     config_path = Path(__file__).parent.parent.parent / "logger_config.json"
@@ -26,7 +27,7 @@ async def main() -> None:
     )
 
     prompt = "List the files in the current directory, then say hello."
-    stream = query(prompt=prompt, options=options)
+    stream = cast(AsyncGenerator[Message, None], query(prompt=prompt, options=options))
     try:
         async for message in stream:
             print(message)
