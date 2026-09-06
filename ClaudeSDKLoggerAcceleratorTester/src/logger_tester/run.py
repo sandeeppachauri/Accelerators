@@ -4,10 +4,12 @@ from __future__ import annotations
 import asyncio
 import json
 import os
+from collections.abc import AsyncGenerator
 from pathlib import Path
+from typing import cast
 
 from auth_accelerator.options import build_options
-from claude_agent_sdk import HookMatcher, query
+from claude_agent_sdk import HookMatcher, Message, query
 
 import sdk_logger_accelerator as logger
 from sdk_logger_accelerator import Scope
@@ -17,14 +19,18 @@ SESSION_ID = "tester-session"
 
 async def _drive_tool_call() -> None:
     """Covers Scope.TOOL_CALL via the real pre/post hook pair."""
+    environment: str = os.environ.get("ENVIRONMENT") or "local"
     options = build_options(
-        environment=os.environ.get("ENVIRONMENT", "local"),
+        environment=environment,
         hooks={
             "PreToolUse": [HookMatcher(hooks=[logger.pre_tool_use_hook])],
             "PostToolUse": [HookMatcher(hooks=[logger.post_tool_use_hook])],
         },
     )
-    stream = query(prompt="List the files in the current directory.", options=options)
+    stream = cast(
+        AsyncGenerator[Message, None],
+        query(prompt="List the files in the current directory.", options=options),
+    )
     try:
         async for _message in stream:
             pass
