@@ -1,4 +1,4 @@
-# src/logger_tester/run.py
+# src/logger_tester/run2.py
 from __future__ import annotations
 
 import asyncio
@@ -13,7 +13,7 @@ import sdk_logger_accelerator as logger
 from sdk_logger_accelerator import Scope
 
 async def main() -> None:
-    config_path = Path(__file__).parent / "logger_config.json"
+    config_path = Path(__file__).parent.parent.parent / "logger_config.json"
     logger.configure(json.loads(config_path.read_text()))
  
     options = build_options(
