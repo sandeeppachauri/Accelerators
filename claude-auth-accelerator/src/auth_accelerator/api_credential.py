@@ -13,3 +13,9 @@ def build_api_credential(environment: str = "local") -> str:
             "be used with the raw Messages API. Set ANTHROPIC_API_KEY instead."
         )
     return credential.env["ANTHROPIC_API_KEY"]
+
+
+def build_base_url(environment: str = "local") -> str | None:
+    """Resolve the custom endpoint (if any) for the raw Messages API client."""
+    credential = resolve_auth(environment)
+    return credential.env.get("ANTHROPIC_BASE_URL")

@@ -28,7 +28,7 @@ async def run_oauth_session_example() -> None:
 
 def run_messages_api_example() -> None:
     """Mode 2: raw Messages API with a console API key (no SDK subprocess)."""
-    from auth_accelerator import build_api_credential
+    from auth_accelerator import build_api_credential, build_base_url
     import anthropic
 
     try:
@@ -36,7 +36,7 @@ def run_messages_api_example() -> None:
     except AuthResolutionError as exc:
         print(f"[messages_api] skipped: {exc}")
         return
-    client = anthropic.Anthropic(api_key=api_key)
+    client = anthropic.Anthropic(api_key=api_key, base_url=build_base_url(environment="local"))
     response = client.messages.create(
         model="claude-sonnet-4-6",
         max_tokens=32,

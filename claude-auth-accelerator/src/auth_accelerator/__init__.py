@@ -1,7 +1,7 @@
 # src/auth_accelerator/__init__.py
 from __future__ import annotations
 
-from .api_credential import build_api_credential
+from .api_credential import build_api_credential, build_base_url
 from .exceptions import AuthResolutionError
 from .providers import ResolvedCredential
 from .resolver import resolve_auth
@@ -10,6 +10,7 @@ __all__ = [
     "AuthResolutionError",
     "ResolvedCredential",
     "build_api_credential",
+    "build_base_url",
     "build_options",
     "resolve_auth",
 ]
