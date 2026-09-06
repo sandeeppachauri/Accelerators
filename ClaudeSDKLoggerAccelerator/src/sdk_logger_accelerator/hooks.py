@@ -5,6 +5,8 @@ import time
 from datetime import datetime, timezone
 from typing import Any
 
+from claude_agent_sdk import HookContext, HookInput
+
 from .schema import Scope, TraceRecord
 from .writer import write_trace
 
@@ -16,7 +18,7 @@ def _now_iso() -> str:
 
 
 async def pre_tool_use_hook(
-    input_data: dict, tool_use_id: str | None, context: Any = None
+    input_data: HookInput, tool_use_id: str | None, context: HookContext | None = None
 ) -> dict:
     """PreToolUse HookCallback (see claude_agent_sdk.types.HookCallback).
     input_data is a PreToolUseHookInput dict: session_id, tool_name,
@@ -39,7 +41,7 @@ async def pre_tool_use_hook(
 
 
 async def post_tool_use_hook(
-    input_data: dict, tool_use_id: str | None, context: Any = None
+    input_data: HookInput, tool_use_id: str | None, context: HookContext | None = None
 ) -> dict:
     """PostToolUse HookCallback. Pairs with the pre-hook via tool_use_id to
     compute latency_ms."""
