@@ -21,6 +21,7 @@ class Scope(str, Enum):
     INFO = "INFO"
     WARNING = "WARNING"
     DEBUG = "DEBUG"
+    OTHER = "OTHER"
 
 
 @dataclass

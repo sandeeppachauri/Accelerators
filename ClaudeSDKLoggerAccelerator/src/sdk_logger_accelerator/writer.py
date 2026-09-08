@@ -12,10 +12,13 @@ from .schema import TraceRecord
 
 async def write_trace(record: TraceRecord) -> None:
     """Serialize record to JSON and emit via the configured rotating file
-    logger. Skipped if record.scope isn't in enabled_scopes. File I/O runs
-    in a thread so it never blocks the event loop; a failure raises
-    LoggerWriteError, which propagates to whoever awaited this call."""
+    logger. Skipped if logging is disabled (config.enabled is False) or if
+    record.scope isn't in enabled_scopes. File I/O runs in a thread so it
+    never blocks the event loop; a failure raises LoggerWriteError, which
+    propagates to whoever awaited this call."""
     config = get_config()
+    if not config.enabled:
+        return
     if record.scope not in config.enabled_scopes:
         return
 

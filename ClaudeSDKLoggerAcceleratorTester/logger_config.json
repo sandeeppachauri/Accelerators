@@ -16,6 +16,8 @@
     "ERROR",
     "INFO",
     "WARNING",
-    "DEBUG"
-  ]
+    "DEBUG",
+    "OTHER"
+  ],
+  "enabled": true
 }

@@ -24,6 +24,7 @@ class LoggerConfig:
     filename_pattern: str = "trace.log"
     rotation: RotationConfig = field(default_factory=RotationConfig)
     enabled_scopes: frozenset[Scope] = field(default_factory=lambda: ALL_SCOPES)
+    enabled: bool = True
 
     @classmethod
     def from_dict(cls, data: dict) -> LoggerConfig:
@@ -38,6 +39,7 @@ class LoggerConfig:
             filename_pattern=data.get("filename_pattern", "trace.log"),
             rotation=rotation,
             enabled_scopes=enabled_scopes,
+            enabled=data.get("enabled", True),
         )
 
 

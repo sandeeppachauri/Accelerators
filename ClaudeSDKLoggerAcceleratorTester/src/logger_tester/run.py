@@ -79,6 +79,10 @@ async def _drive_remaining_scopes() -> None:
         Scope.DEBUG, session_id=SESSION_ID, turn_index=1,
         payload={"note": "Simulated debug payload"},
     )
+    await logger.log_event(
+        Scope.OTHER, session_id=SESSION_ID, turn_index=1,
+        payload="Simulated event for an uncategorized scope",
+    )
 
 
 async def _run() -> None:
